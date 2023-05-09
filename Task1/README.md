@@ -1,11 +1,27 @@
 # Linear Regression by Umar Anzar
 
+Linear Regression is a type of supervised learning algorithm used in machine learning and statistics to predict a continuous target variable based on one or more predictor variables. It is a linear approach to modeling the relationship between a dependent variable and one or more independent variables.
+
 ## Import Libraries
+
+- NumPy: A Python library used for numerical computing. It provides support for multidimensional arrays and matrices, along with functions to perform mathematical operations on them.
+
+- Pandas: A library used for data manipulation and analysis. It provides data structures for efficient storage and manipulation of tabular data.
+
+- Matplotlib: A plotting library for creating static, interactive, and animated visualizations in Python.
+
+- Seaborn: A data visualization library based on Matplotlib.
+
+- Scikit-learn: A machine learning library for Python. It provides a range of algorithms for classification, regression, clustering, and dimensionality reduction, along with tools for model selection and evaluation.
 
 
 ```python
 import numpy as np, pandas as pd, matplotlib.pyplot as plt, seaborn as sns
-%matplotlib inline
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+# allows for displaying plots inline within the notebook
+%matplotlib inline 
 ```
 
 ## Import Dataset
@@ -99,6 +115,7 @@ dataset.head(10)
 
 
 ## Plot 2d Graph
+By observing the scatter plot graph, it can be inferred that there is a strong relationship between scores and hours, which seems to be directly proportional. As the number of hours increase, the scores also tend to increase.
 
 
 ```python
@@ -115,6 +132,9 @@ plt.show()
     
 
 
+### Best Fit Line 
+Used the regplot function to gain an understanding of the best-fit line on this graph
+
 
 ```python
 sns.regplot(x='Hours',y='Scores',data=dataset, line_kws={"color": "red"})
@@ -123,7 +143,7 @@ plt.show()
 
 
     
-![png](output_7_0.png)
+![png](output_8_0.png)
     
 
 
@@ -137,17 +157,17 @@ y = dataset.iloc[:,-1].values
 
 ## Predicting Dataset
 
+Data is split into two sets: training and testing data. The model is trained on the training data and then used to predict the target value of the test data. The error between the true and predicted target value is then calculated to evaluate the performance of the model.
+
 ### Train/Test Split
 
 
 ```python
-from sklearn.model_selection import train_test_split
 train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.2, random_state = 0)
 ```
 
 
 ```python
-from sklearn.linear_model import LinearRegression
 model = LinearRegression()
 model.fit(train_x,train_y)
 m = model.coef_
@@ -164,7 +184,7 @@ plt.show()
 
 
     
-![png](output_14_0.png)
+![png](output_15_0.png)
     
 
 
@@ -184,10 +204,14 @@ y_pred
 
 
 ### Evaluation
+- mean_squared_error: A function from scikit-learn.metrics used to compute the mean squared error between the predicted and actual values.
+
+- mean_absolute_error: A function from scikit-learn.metrics used to compute the mean absolute error between the predicted and actual values.
+
+- r2_score: A function from scikit-learn.metrics used to compute the R-squared (coefficient of determination) regression score function.
 
 
 ```python
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 print('mean_squared_error', mean_squared_error(test_y, y_pred), '\n',
       'mean_absolute_error', mean_absolute_error(test_y, y_pred), '\n',
       'r2_score', r2_score(test_y, y_pred))
@@ -198,11 +222,17 @@ print('mean_squared_error', mean_squared_error(test_y, y_pred), '\n',
      r2_score 0.9454906892105355
     
 
-#### Error Function
+## Cross-Validation 
+
+Cross-validation is a technique used to evaluate the performance of a machine learning model on unseen data. It is done by splitting the dataset into multiple folds, then training the model on each fold and evaluating it on the remaining folds. This process is repeated multiple times, with each fold used as a test set once. The final performance of the model is then averaged over all the folds.
+
+In this case, the dataset is split at a random state different on each iteration. This means that each time the cross-validation process is run, a different set of training and test folds will be created. This helps to ensure that the performance of the model is not simply due to chance.
+
+### Error Function
+This function returns a data frame row containing the error metrics of model evaluation.
 
 
 ```python
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 def error(y_true, y_pred):
     mse = mean_squared_error(y_true, y_pred)
     mae = mean_absolute_error(y_true, y_pred)
@@ -212,9 +242,6 @@ def error(y_true, y_pred):
 
 
 ```python
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-
 errorDf = pd.DataFrame(columns=['random_state', 'mean_squared_error', 'mean_absolute_error', 'r2_score'])
 
 model = LinearRegression()
@@ -298,6 +325,8 @@ errorDf.head(5)
 
 
 
+### Plotting Histogram
+
 
 ```python
 # Create subplots with 1 row and 3 columns
@@ -315,9 +344,15 @@ plt.show()
 
 
     
-![png](output_22_0.png)
+![png](output_25_0.png)
     
 
+
+## Result
+Overall, the model is performing well. The MSE and MAE are relatively small, and the R2 score is high. This means that the model is able to accurately predict the true values.
+
+- The mean squared error is higher than the mean absolute error. This is because the squared error is more sensitive to outliers than the absolute error.
+- The R2 score is close to 1. This means that the model is able to explain a large amount of the variance in the true values.
 
 
 ```python
