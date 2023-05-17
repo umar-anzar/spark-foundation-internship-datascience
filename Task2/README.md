@@ -44,7 +44,7 @@ from itertools import combinations
 ## Import Dataset
 - The iris dataset is a classic and very easy multi-class classification dataset.
 
-<center>
+
 
 |          |            |
 |:--------:|:----------:|
@@ -54,7 +54,7 @@ from itertools import combinations
 | Dimensionality | 4 |
 | Features | real, positive |
 
-</center>
+
 
 ```python
 iris = datasets.load_iris()
