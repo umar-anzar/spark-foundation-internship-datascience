@@ -1,4 +1,6 @@
-# Linear Regression by Umar Anzar
+# Linear Regression
+
+Author: Muhammad Umar Anzar
 
 Linear Regression is a type of supervised learning algorithm used in machine learning and statistics to predict a continuous target variable based on one or more predictor variables. It is a linear approach to modeling the relationship between a dependent variable and one or more independent variables.
 
