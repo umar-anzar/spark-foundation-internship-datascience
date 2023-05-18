@@ -57,6 +57,7 @@ iris.data[:4,:] # print some rows
 
     Attributes in iris data:  dict_keys(['data', 'target', 'frame', 'target_names', 'DESCR', 'feature_names', 'filename', 'data_module'])
 
+
     array([[5.1, 3.5, 1.4, 0.2],
            [4.9, 3. , 1.4, 0.2],
            [4.7, 3.2, 1.3, 0.2],
@@ -407,8 +408,8 @@ fig, axis1 = plt.subplots(ncols=2, figsize=(12, 4))
 fig.suptitle("Scatter 2D Plot of Iris Data")
 for i in range(2):
 
-    sns.scatterplot(x=x[y==0, i], y=x[y==0, i+1],  ax=axis1[i], color='red', label='versicolor')
-    sns.scatterplot(x=x[y==1, i], y=x[y==1, i+1],  ax=axis1[i], color='blue', label='setosa')
+    sns.scatterplot(x=x[y==0, i], y=x[y==0, i+1],  ax=axis1[i], color='red', label='setosa')
+    sns.scatterplot(x=x[y==1, i], y=x[y==1, i+1],  ax=axis1[i], color='blue', label='versicolor')
     sns.scatterplot(x=x[y==2, i], y=x[y==2, i+1],  ax=axis1[i], color='green', label='virginica')
     sns.scatterplot(x=cluster[:, i], y=cluster[:, i+1], ax=axis1[i], 
                     s=300, marker='X', c='black')
@@ -437,7 +438,6 @@ ax.scatter3D(x[y==1, i], x[y==1, i+1], x[y==1, i+2], s=50*x[y==1, i+3], c='blue'
 ax.scatter3D(x[y==2, i], x[y==2, i+1], x[y==2, i+2], s=50*x[y==2, i+3], c='green')
 
 plt.show()
-
 ```
 
 
