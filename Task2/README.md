@@ -39,6 +39,7 @@ from itertools import combinations
 
 ## Import Dataset
 - The iris dataset is a classic and very easy multi-class classification dataset.
+
 |          |            |
 |:--------:|:----------:|
 | Classes  |      3     |
